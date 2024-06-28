@@ -10,7 +10,7 @@
     }
   </style>
   <script>
-    var timeLeft = 60 * 2; // 30 Minuten in Sekunden
+    var timeLeft = 60; // 1 Minute in Sekunden
 
     function startTimer() {
       var timer = document.getElementById('timer');
@@ -25,7 +25,15 @@
           clearInterval(interval);
           timer.innerHTML = "Zeit ist um!";
           alert("Zeit ist um!");
-          document.getElementById('googleForm').submit();
+          // Versuchen, das Formular abzusenden
+          var iframe = document.getElementById('googleForm');
+          var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+          var form = iframeDoc.querySelector('form');
+          if (form) {
+            form.submit();
+          } else {
+            alert("Formular nicht gefunden. Bitte überprüfen Sie die iFrame-URL und den Zugriff.");
+          }
         }
       }, 1000);
     }
@@ -34,7 +42,7 @@
   </script>
 </head>
 <body>
-  <h1 id="timer">30:00</h1>
-  <iframe id="googleForm" src="https://forms.gle/cvXrw9hNZabfjNwr6" width="100%" height="600px"></iframe>
+  <h1 id="timer">1:00</h1>
+  <iframe id="googleForm" src="YOUR_GOOGLE_FORM_URL_HERE" width="100%" height="600px"></iframe>
 </body>
 </html>
