@@ -28,11 +28,11 @@
           // Versuchen, das Formular abzusenden
           var iframe = document.getElementById('googleForm');
           var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-          var form = iframeDoc.querySelector('form');
-          if (form) {
-            form.submit();
+          var submitButton = iframeDoc.querySelector('div[role=button]');
+          if (submitButton) {
+            submitButton.click();
           } else {
-            alert("Formular nicht gefunden. Bitte überprüfen Sie die iFrame-URL und den Zugriff.");
+            alert("Formular-Absende-Schaltfläche nicht gefunden. Bitte überprüfen Sie die iFrame-URL und den Zugriff.");
           }
         }
       }, 1000);
