@@ -26,13 +26,18 @@
           timer.innerHTML = "Zeit ist um!";
           alert("Zeit ist um!");
           // Versuchen, das Formular abzusenden
-          var iframe = document.getElementById('googleForm');
-          var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-          var submitButton = iframeDoc.querySelector('div[role=button]');
-          if (submitButton) {
-            submitButton.click();
-          } else {
-            alert("Formular-Absende-Schaltfläche nicht gefunden. Bitte überprüfen Sie die iFrame-URL und den Zugriff.");
+          try {
+            var iframe = document.getElementById('googleForm');
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var form = iframeDoc.querySelector('form');
+            if (form) {
+              form.submit();
+              console.log("Formular wurde erfolgreich abgesendet.");
+            } else {
+              console.error("Formular nicht gefunden. Bitte überprüfen Sie die iFrame-URL und den Zugriff.");
+            }
+          } catch (error) {
+            console.error("Fehler beim Absenden des Formulars: ", error);
           }
         }
       }, 1000);
@@ -43,6 +48,7 @@
 </head>
 <body>
   <h1 id="timer">1:00</h1>
-  <iframe id="googleForm" src="https://forms.gle/cvXrw9hNZabfjNwr6" width="100%" height="600px"></iframe>
+  <iframe id="googleForm" src="YOUR_GOOGLE_FORM_URL_HERE" width="100%" height="600px"></iframe>
 </body>
 </html>
+
